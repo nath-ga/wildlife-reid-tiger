@@ -1,0 +1,30 @@
+# config.yaml
+
+project:
+  name: wildlife-reid-tiger
+  author: [dein_name]
+  date: 2025-06-02
+
+dataset:
+  path: ./data/processed
+  image_size: [224, 224]
+  num_classes: 10
+  augmentations: true
+
+model:
+  type: siamese
+  embedding_size: 128
+  pretrained_backbone: true
+  backbone: resnet18
+
+training:
+  epochs: 20
+  batch_size: 32
+  learning_rate: 0.001
+  optimizer: adam
+  loss_function: contrastive
+
+output:
+  model_path: ./models/siamese_model.pt
+  log_dir: ./outputs/logs/
+  save_every_n_epochs: 5
