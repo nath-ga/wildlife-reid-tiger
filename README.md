@@ -16,8 +16,21 @@ Solche Re-Identification-Modelle werden bereits in der Wildtierforschung eingese
 
 1. **Projektplanung**
    - Zielsetzung und Recherche zu Re-ID im Kontext Wildtiere
-   - Auswahl geeigneter öffentlich zugänglicher Datensätze
-   - Definition der Erfolgskriterien (Accuracy, Ähnlichkeitsmetriken)
+      Ziel dieses Projekts ist es, ein Machine-Learning-Modell zu entwickeln, das individuelle afrikanische Leoparden anhand von Kamerafallen-Bildern wiedererkennt.  
+      Die Herausforderung besteht darin, trotz unterschiedlicher Blickwinkel, Lichtverhältnisse und Posen das gleiche Tier zuverlässig zu identifizieren.  
+      Der Datensatz „Leopard ID 2022“ liefert dafür echte Tier-IDs, Bounding Boxes und zusätzliche Informationen wie Blickrichtung und Zeitstempel.  
+      Das Projekt soll die visuelle Wiedererkennung (Re-Identification) durch ein Siamese- oder Triplet-Netzwerk ermöglichen und die Qualität der Zuordnung mithilfe von geeigneten Metriken evaluieren.
+   - Auswahl geeigneter öffentlich zugänglicher Datensätze:
+     - **Verglichen**: Desert Lion, WCS Camera Traps, Leopard ID 2022
+     - **Entschieden**: Leopard ID 2022, da echte Tier-IDs, Bounding Boxes, Blickrichtung, Zeitinfos enthalten sind → optimal für Re-Identification
+     - Erste Analyse der Metadaten ergab, dass nur 69 Bilder eine eindeutige Zuordnung zu genau einer Individuen-ID enthalten.  
+      Um die Komplexität niedrig zu halten und einen realistischen Startpunkt zu schaffen, wird das initiale Modell auf genau diesen 69 Bildern aufgebaut.  
+      Die restlichen Annotationen mit Mehrfachzuordnungen bleiben vorerst ungenutzt, könnten aber in einem zweiten Schritt eingebunden werden.
+
+   - Definition der Erfolgskriterien:
+     - **Top-1 Accuracy** zur einfachen Bewertung
+     - **Cosine Similarity** zur Paarbewertung im Trainingsprozess
+     - Optional später: **Top-5 Accuracy**, **mean Average Precision (mAP)**
 
 2. **Datenvorbereitung**
    - Strukturieren und ggf. Zuschneiden der Bilder
