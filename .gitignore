@@ -1,0 +1,19 @@
+# Python-Umgebungen und Cache
+__pycache__/
+*.pyc
+
+# VSCode
+.vscode/
+
+# Trainingsdaten
+data/images/
+data/annotations_clean.csv
+*.tar.gz
+*.zip
+
+# Modelle
+models/
+outputs/
+
+# Sonstiges
+.DS_Store
