@@ -23,9 +23,12 @@ Solche Re-Identification-Modelle werden bereits in der Wildtierforschung eingese
    - Auswahl geeigneter öffentlich zugänglicher Datensätze:
      - **Verglichen**: Desert Lion, WCS Camera Traps, Leopard ID 2022
      - **Entschieden**: Leopard ID 2022, da echte Tier-IDs, Bounding Boxes, Blickrichtung, Zeitinfos enthalten sind → optimal für Re-Identification
+      Datensatz: Botswana Predator Conservation Trust (2022). Panthera pardus CSV-Export. Abgerufen aus African Carnivore Wildbook vom 28.04.2022.
      - Erste Analyse der Metadaten ergab, dass nur 69 Bilder eine eindeutige Zuordnung zu genau einer Individuen-ID enthalten.  
       Um die Komplexität niedrig zu halten und einen realistischen Startpunkt zu schaffen, wird das initiale Modell auf genau diesen 69 Bildern aufgebaut.  
       Die restlichen Annotationen mit Mehrfachzuordnungen bleiben vorerst ungenutzt, könnten aber in einem zweiten Schritt eingebunden werden.
+
+      Unter den 69 Datensätzen war keine Paarbildung möglich, ich habe daher für die Trainingsdaten einfach immer die erste Tier-ID genommen, wenn auf einem Bild mehrere angegeben waren. So konnte ich mehr Bilder behalten – und dadurch auch genug Paare bilden, um mein Modell zu trainieren.
 
    - Definition der Erfolgskriterien:
      - **Top-1 Accuracy** zur einfachen Bewertung
