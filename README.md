@@ -28,12 +28,16 @@ Solche Re-Identification-Modelle werden bereits in der Wildtierforschung eingese
       Um die Komplexität niedrig zu halten und einen realistischen Startpunkt zu schaffen, wird das initiale Modell auf genau diesen 69 Bildern aufgebaut.  
       Die restlichen Annotationen mit Mehrfachzuordnungen bleiben vorerst ungenutzt, könnten aber in einem zweiten Schritt eingebunden werden.
 
-      Unter den 69 Datensätzen war keine Paarbildung möglich, ich habe daher für die Trainingsdaten einfach immer die erste Tier-ID genommen, wenn auf einem Bild mehrere angegeben waren. So konnte ich mehr Bilder behalten – und dadurch auch genug Paare bilden, um mein Modell zu trainieren.
+      Die ursprünglich gewählten 69 Datensätze enthielten jeweils nur eine eindeutige Individuen-ID, aber kein Tier kam mehrfach vor – daher war keine Paarbildung möglich.
+      Um ein echtes Trainingsset zu erzeugen, habe ich das Filterkriterium erweitert:
+      Alle Annotationen mit mindestens einer individual_id wurden zugelassen, und wenn mehrere IDs enthalten waren, habe ich einfach die erste ID verwendet.
+      So konnte ich 6.825 Bilder nutzen und daraus über 471.000 positive sowie 471.000 negative Bildpaare generieren – eine gute Grundlage für das Training eines Re-ID-Modells.
 
    - Definition der Erfolgskriterien:
-     - **Top-1 Accuracy** zur einfachen Bewertung
-     - **Cosine Similarity** zur Paarbewertung im Trainingsprozess
-     - Optional später: **Top-5 Accuracy**, **mean Average Precision (mAP)**
+      Ich verwende Top-1 Accuracy als Hauptmetrik: Das Modell soll das richtige Tierbild an erster Stelle erkennen.
+      Während des Trainings verwende ich außerdem die Cosine Similarity, um zu prüfen, wie ähnlich zwei Bilder sind.
+      Optional könnte ich später noch Top-5 Accuracy oder mean Average Precision (mAP) nutzen, wenn das Modell stabil läuft.
+
 
 2. **Datenvorbereitung**
    - Strukturieren und ggf. Zuschneiden der Bilder
@@ -41,9 +45,13 @@ Solche Re-Identification-Modelle werden bereits in der Wildtierforschung eingese
    - Sicherstellung einheitlicher Größen, Formate und Helligkeit
 
 3. **Modellaufbau**
-   - Entwicklung eines Siamese Networks in PyTorch
-   - Vergleich von Bildpaaren (Triplet Loss oder Contrastive Loss)
-   - Trainingsdatengenerierung (Positiv-/Negativpaare)
+   - Kleines Siamese-Netzwerk in PyTorch erstellt
+   - Arbeitet mit Graustufenbildern (1 Kanal, 100×100 Pixel)
+   - Besteht aus gemeinsamem CNN + FC-Layer → 32-dimensionale Embeddings
+   - Funktioniert mit `PairDataset` und gibt zwei Embeddings zurück
+   - Erste Tests mit Zufallsbildern erfolgreich durchgeführt
+   - Modell ist einsatzbereit für Training mit echten Paaren
+
 
 4. **Training und Evaluation**
    - Durchführung des Trainings

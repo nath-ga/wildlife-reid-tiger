@@ -10,6 +10,8 @@ data/images/
 data/annotations_clean.csv
 *.tar.gz
 *.zip
+data/pairs.csv
+data/instances_train2022.json
 
 # Modelle
 models/
