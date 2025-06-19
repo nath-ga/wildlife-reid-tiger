@@ -1,18 +1,18 @@
 # 🐅 wildlife-reid-tiger – ML-Projekt zur visuellen Wiedererkennung von Wildtieren
 
-## 🌱 Ziel des Projekts
+## Ziel des Projekts
 
 Dieses Projekt entwickelt ein Machine-Learning-Modell zur visuellen Wiedererkennung einzelner Tiere – mit Fokus auf Tiger. Ziel ist es, anhand von Kamerafallen-Bildern zu erkennen, ob dasselbe Tier mehrfach erscheint – trotz unterschiedlicher Perspektiven, Lichtverhältnisse oder Körperhaltungen.
 
 Solche Re-Identification-Modelle werden bereits in der Wildtierforschung eingesetzt, um z. B. Populationsgrößen besser zu erfassen oder Bewegungsmuster zu analysieren.
 
-## 🔍 Motivation
+## Motivation
 
 - **Ökologisch relevant**: Unterstützt Forschung zum Artenschutz
 - **Technisch spannend**: Anwendung von Deep Learning mit Siamese-Architektur
 - **Portfolio-wirksam**: Kombination aus Computer Vision, Re-ID und Datenverständnis
 
-## 🧠 Geplante Schritte
+## Geplante Schritte
 
 1. **Projektplanung**
    - Zielsetzung und Recherche zu Re-ID im Kontext Wildtiere
@@ -54,31 +54,81 @@ Solche Re-Identification-Modelle werden bereits in der Wildtierforschung eingese
 
 
 4. **Training und Evaluation**
-   - Durchführung des Trainings
-   - Visualisierung von Beispielen (z. B. ähnlich vs. unähnlich)
-   - Confusion Matrix oder Ranking der Top-N ähnlichsten Bilder
+     - Durchführung des Trainings mit einem Teilset (1000 Paaren) zur Dokumentation im Portfolio.
+     - Lernrate: 0.001, Batch Size: 8, Epochs: 10
+     - Verlustfunktion: Contrastive Loss
+     - Ergebnis (Durchschnittlicher Loss):
+       
+       | Epoch | Loss |
+       |-------|------|
+       | 1     | 0.3543 |
+       | 2     | 0.3029 |
+       | 3     | 0.3025 |
+       | 4     | 0.2818 |
+       | 5     | 0.2817 |
+       | 6     | 0.2689 |
+       | 7     | 0.2652 |
+       | 8     | 0.2641 |
+       | 9     | 0.2494 |
+       | 10    | 0.2547 |
+
+     - Das Modell wurde gespeichert unter: `models/siamese_20250617-1348.pt`
+     - Aufgrund begrenzter Rechenleistung wurde bewusst nur ein Teilset verwendet. Ziel war ein demonstrierbares Ergebnis mit dokumentiertem Trainingsverlauf.
+
+     - Beispielpaare siehe Präsentation.
+
+     Die Cosine Distance wurde als Maß für visuelle Ähnlichkeit berechnet.
 
 5. **Dokumentation & Reflexion**
-   - Erkenntnisse über Modellverhalten und Grenzen
-   - Vorschläge zur Weiterentwicklung (mehr Daten, Tierarten, Web-Demo)
 
-## 🧰 Technologien & Tools
+   - Das Modell zeigt bei kleinem Trainingsumfang bereits ein erkennbares Lernverhalten. Die Cosine-Distanzen unterscheiden zuverlässig ähnliche und unähnliche Bildpaare.
+   - Der Verlust (Contrastive Loss) sank im Verlauf der 10 Epochen kontinuierlich, was auf eine gute Konvergenz hindeutet.
+   - Einschränkungen: Training wurde bewusst auf 1000 Paare begrenzt, um Speicher- und Rechenzeit zu schonen. Dies erlaubt keine Aussagen über Generalisierbarkeit.
+   - Für den Demonstrationszweck im Portfolio ist das Projekt erfolgreich abgeschlossen.
+   - **Vorschläge zur Weiterentwicklung:**
+     - Training auf dem vollständigen Datensatz (471k Paarungen) zur Bewertung echter Top-1-Genauigkeit
+     - Einbindung weiterer Tierarten zur Erprobung der Generalisierbarkeit
+     - Aufbau einer Web-Demo mit Upload-Funktion (z. B. mit Streamlit), um Ähnlichkeitsvergleiche live zu testen
+
+## Technologien & Tools
 
 - Python 3.10+
-- PyTorch
-- OpenCV
-- Visual Studio Code
-- (optional: TensorBoard, Streamlit, scikit-learn)
+- PyTorch – für Modellarchitektur und Training
+- torchvision – für Datenvorverarbeitung und Transformationspipelines
+- Matplotlib – zur Visualisierung von Bildpaaren und Ähnlichkeitswerten
+- Pandas – zur Handhabung des Pair-Datensatzes
+- Visual Studio Code – als Entwicklungsumgebung
 
-## 📁 Projektstruktur (geplant)
+## Projektstruktur (geplant)
 
 <p>
+```plaintext
 wildlife-reid-tiger/
-├── data/ # Rohdaten und bearbeitete Bilder
-├── models/ # Trainierte Modelle
-├── src/ # Trainingslogik, Netzarchitekturen, Hilfsfunktionen
-├── outputs/ # Beispielbilder, Visualisierungen
-├── README.md
-├── requirements.txt
-└── .gitignore
+├── data/            # Rohdaten und bearbeitete Bilder (nicht im Repo)
+├── models/          # Trainierte Modelle (ignored)
+├── src/             # Trainingslogik, Netzarchitekturen, Hilfsfunktionen
+├── outputs/         # Visualisierungen für Präsentation (optional)
+├── README.md        # Projektdokumentation
+├── requirements.txt # Python-Abhängigkeiten
+└── .gitignore       # Ausschlussregeln für sensible/große Dateien
+</p>
+
+## Projekt-Präsentation
+
+Hier ist eine visuelle Zusammenfassung des Projekts als Präsentation:
+
+| Slide | Inhalt                     |
+|-------|----------------------------|
+| 1     | Projektübersicht           |
+| 2     | Methodik & Technik         |
+| 3     | Trainingsparameter         |
+| 4     | Beispielausgabe: Gleiches Tier |
+| 5     | Beispielausgabe: Verschiedenes Tier |
+
+<p align="center">
+  <img src="presentation/slide1_overview.png" width="1200"><br>
+  <img src="presentation/slide2_method.png" width="1200"><br>
+  <img src="presentation/slide3_training.png" width="1200"><br>
+  <img src="presentation/slide4_same.png" width="1200"><br>
+  <img src="presentation/slide5_diff.png" width="1200">
 </p>
