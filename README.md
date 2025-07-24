@@ -101,8 +101,7 @@ Solche Re-Identification-Modelle werden bereits in der Wildtierforschung eingese
 
 ## Projektstruktur (geplant)
 
-<p>
-```plaintext
+```
 wildlife-reid-tiger/
 ├── data/            # Rohdaten und bearbeitete Bilder (nicht im Repo)
 ├── models/          # Trainierte Modelle (ignored)
@@ -111,7 +110,7 @@ wildlife-reid-tiger/
 ├── README.md        # Projektdokumentation
 ├── requirements.txt # Python-Abhängigkeiten
 └── .gitignore       # Ausschlussregeln für sensible/große Dateien
-</p>
+```
 
 ## Projekt-Präsentation
 
@@ -132,3 +131,30 @@ Hier ist eine visuelle Zusammenfassung des Projekts als Präsentation:
   <img src="presentation/slide4_same.png" width="1200"><br>
   <img src="presentation/slide5_diff.png" width="1200">
 </p>
+
+## Dataset License & Citation
+
+This project uses the **Leopard ID 2022** dataset made available by the Botswana Predator Conservation Trust and Kasim Rafiq, in collaboration with Wild Me.
+
+- License: **Community Data License Agreement (CDLA) – Permissive variant**
+- Source: African Carnivore Wildbook, 2022-04-28
+- Contact: info@wildme.org
+- Dataset format: MS COCO-style JSON annotations with bounding boxes and unique leopard IDs
+
+If you use this dataset in published work, please cite as:
+
+> Botswana Predator Conservation Trust (2022). *Panthera pardus CSV custom export*. Retrieved from African Carnivore Wildbook 2022-04-28.
+
+## License
+
+This project is provided under the following terms:
+
+- All **non-code content** (texts, project idea, images, visualizations) is licensed under **CC BY-NC 4.0**  
+  → https://creativecommons.org/licenses/by-nc/4.0/
+
+- The **source code** is free to use and adapt for **non-commercial purposes**, with attribution.  
+  Commercial use requires permission: [your email]
+
+© 2025 Nathalie Gassert
+
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC--BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
